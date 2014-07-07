@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<tree string="Credit Limits">
+    <field name="rec_name"/>
+    <field name="unpayed_amount"/>
+    <field name="pending_amount"/>
+    <field name="draft_invoices_amount"/>
+    <field name="uninvoiced_amount"/>
+    <field name="credit_amount"/>
+    <field name="limit_percent"/>
+    <field name="amount_to_limit"/>
+</tree>

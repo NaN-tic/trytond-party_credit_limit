@@ -1,0 +1,43 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:party.party,amount_to_limit:"
+msgid "Amount to limit"
+msgstr "Importe hasta el límite"
+
+msgctxt "field:party.party,draft_invoices_amount:"
+msgid "Draft invoices amount"
+msgstr "Importe facturas borrador"
+
+msgctxt "field:party.party,limit_percent:"
+msgid "% Limit"
+msgstr "% Límite"
+
+msgctxt "field:party.party,pending_amount:"
+msgid "Pending amount"
+msgstr "Importe pendiente"
+
+msgctxt "field:party.party,uninvoiced_amount:"
+msgid "Uninvoiced amount"
+msgstr "Importe sin facturar"
+
+msgctxt "field:party.party,unpayed_amount:"
+msgid "Unpayed amount"
+msgstr "Importe sin pagar"
+
+msgctxt "model:ir.action,name:act_party_credit_limit_form"
+msgid "Credit Limits"
+msgstr "Límites de crédito"
+
+msgctxt "model:ir.action,name:act_wizard_credit_limit"
+msgid "Credit Limit"
+msgstr "Límite de crédito"
+
+msgctxt "model:ir.ui.menu,name:menu_party_credit_limit_form"
+msgid "Credit Limits"
+msgstr "Límites de crédito"
+
+msgctxt "view:party.party:"
+msgid "Credit Limits"
+msgstr "Límites de crédito"

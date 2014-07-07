@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+      copyright notices and license terms. -->
+<form string="Credit Limits">
+    <label name="name"/>
+    <field name="rec_name" colspan="3"/>
+    <label name="unpayed_amount"/>
+    <field name="unpayed_amount"/>
+    <label name="pending_amount"/>
+    <field name="pending_amount"/>
+    <label name="draft_invoices_amount"/>
+    <field name="draft_invoices_amount"/>
+    <label name="uninvoiced_amount"/>
+    <field name="uninvoiced_amount"/>
+    <label name="credit_amount"/>
+    <field name="credit_amount"/>
+    <label name="credit_limit_amount"/>
+    <field name="credit_limit_amount"/>
+    <label name="limit_percent"/>
+    <field name="limit_percent"/>
+    <label name="amount_to_limit"/>
+    <field name="amount_to_limit"/>
+</form>
