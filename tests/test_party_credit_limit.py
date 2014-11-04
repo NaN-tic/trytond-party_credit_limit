@@ -144,7 +144,6 @@ class TestCase(unittest.TestCase):
                                         }, {
                                         'credit': Decimal(100),
                                         'account': revenue.id,
-                                        'party': party.id,
                                         }]),
                             ],
                         }, {
@@ -159,7 +158,6 @@ class TestCase(unittest.TestCase):
                                         }, {
                                         'credit': Decimal(200),
                                         'account': revenue.id,
-                                        'party': party.id,
                                         }]),
                             ],
                         }])
