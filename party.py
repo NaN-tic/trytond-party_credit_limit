@@ -1,5 +1,5 @@
-#The COPYRIGHT file at the top level of this repository contains the full
-#copyright notices and license terms.
+# The COPYRIGHT file at the top level of this repository contains the full
+# copyright notices and license terms.
 from decimal import Decimal
 from sql import Literal
 from sql.aggregate import Sum
@@ -49,7 +49,7 @@ class Party:
         account = Account.__table__()
         today = Date.today()
         transaction = Transaction()
-        cursor = transaction.cursor
+        cursor = transaction.connection.cursor()
         line_query, _ = MoveLine.query_get(line)
 
         user_id = transaction.user
@@ -78,7 +78,7 @@ class Party:
         for party_id, unpayed, pending in cursor.fetchall():
             for name, value in (('unpayed_amount', unpayed),
                     ('pending_amount', pending)):
-                if not name in names:
+                if name not in names:
                     continue
                 # SQLite uses float for SUM
                 if not isinstance(value, Decimal):
@@ -93,17 +93,14 @@ class Party:
         res = {}.fromkeys([p.id for p in parties], Decimal('0.0'))
         without_sales = Transaction().context.get('without_sales', False)
         domain = [
-            ('type', 'in', ('out_invoice', 'out_credit_note')),
+            ('type', '=', ('out')),
             ('party', 'in', [p.id for p in parties]),
             ('state', 'in', ['draft', 'validated']),
             ]
         for invoice in Invoice.search(domain):
             if without_sales and invoice.sales:
                 continue
-            amount = invoice.untaxed_amount
-            if 'credit_note' in invoice.type:
-                amount = amount.copy_negate()
-            res[invoice.party.id] += amount
+            res[invoice.party.id] += invoice.untaxed_amount
         return res
 
     @classmethod
