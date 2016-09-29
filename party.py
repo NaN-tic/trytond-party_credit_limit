@@ -11,11 +11,11 @@ from trytond.transaction import Transaction
 from trytond.wizard import Wizard, StateAction
 
 __all__ = ['Party', 'OpenLimit']
-__metaclass__ = PoolMeta
 
 
 class Party:
     __name__ = 'party.party'
+    __metaclass__ = PoolMeta
 
     unpayed_amount = fields.Function(fields.Numeric('Unpayed amount'),
         'get_accounting_amount')
