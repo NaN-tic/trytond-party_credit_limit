@@ -8,9 +8,8 @@ from sql.conditionals import Coalesce, Case
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
-from trytond.wizard import Wizard, StateAction
 
-__all__ = ['Party', 'OpenLimit']
+__all__ = ['Party']
 
 
 class Party:
@@ -169,22 +168,3 @@ class Party:
     def _credit_limit_to_lock(cls):
         models = super(Party, cls)._credit_limit_to_lock()
         return models + ['account.invoice', 'sale.sale']
-
-
-class OpenLimit(Wizard):
-    'Open Credit Limit'
-    __name__ = 'party.party.open_credit_limit'
-    start_state = 'open_'
-    open_ = StateAction('party_credit_limit.act_party_credit_limit_form')
-
-    def do_open_(self, action):
-        active_ids = Transaction().context['active_ids']
-        data = {
-            'res_id': active_ids
-            }
-        if len(active_ids) == 1:
-            action['views'].reverse()
-        return action, data
-
-    def transition_open_(self):
-        return 'end'

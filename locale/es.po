@@ -1,4 +1,4 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
@@ -30,9 +30,9 @@ msgctxt "model:ir.action,name:act_party_credit_limit_form"
 msgid "Credit Limits"
 msgstr "Límites de crédito"
 
-msgctxt "model:ir.action,name:act_wizard_credit_limit"
-msgid "Credit Limit"
-msgstr "Límite de crédito"
+msgctxt "model:ir.action,name:act_party_credit_limit_relate"
+msgid "Credit Limits"
+msgstr "Límites de crédito"
 
 msgctxt "model:ir.ui.menu,name:menu_party_credit_limit_form"
 msgid "Credit Limits"
