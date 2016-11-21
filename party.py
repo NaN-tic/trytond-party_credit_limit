@@ -27,7 +27,7 @@ class Party:
         'get_uninvoiced_amount')
     amount_to_limit = fields.Function(fields.Numeric('Amount to limit'),
         'get_amounts')
-    limit_percent = fields.Function(fields.Numeric('% Limit'),
+    limit_percent = fields.Function(fields.Numeric('% Limit', digits=(5, 2)),
         'get_amounts')
 
     @classmethod
@@ -140,15 +140,17 @@ class Party:
                 raise Exception('Bad argument')
             res[name] = {}.fromkeys([p.id for p in parties],
                 Decimal('100.0') if name == 'limit_percent'
-                else Decimal('0.0'))
+                else Decimal('0.00'))
         for party in parties:
             if 'amount_to_limit' in names:
                 limit_amount = party.credit_limit_amount or Decimal('0.0')
                 res['amount_to_limit'][party.id] = (
                     limit_amount - party.credit_amount)
             if party.credit_limit_amount and 'limit_percent' in names:
-                res['limit_percent'][party.id] = (Decimal('100.0') *
+                percent = (Decimal('100.0') *
                     party.credit_amount / party.credit_limit_amount)
+                percent = percent.quantize(Decimal('0.01'))
+                res['limit_percent'][party.id] = percent
 
         for key in res.keys():
             if key not in names:
