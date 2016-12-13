@@ -5,6 +5,7 @@ from sql import Literal
 from sql.aggregate import Sum
 from sql.conditionals import Coalesce, Case
 
+from trytond.pyson import Eval
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
@@ -16,16 +17,25 @@ class Party:
     __name__ = 'party.party'
     __metaclass__ = PoolMeta
 
-    unpayed_amount = fields.Function(fields.Numeric('Unpayed amount'),
+    unpayed_amount = fields.Function(fields.Numeric('Unpayed amount',
+        digits=(16, Eval('currency_digits', 2)),
+        depends=['currency_digits']),
         'get_accounting_amount')
-    pending_amount = fields.Function(fields.Numeric('Pending amount'),
+    pending_amount = fields.Function(fields.Numeric('Pending amount',
+        digits=(16, Eval('currency_digits', 2)),
+        depends=['currency_digits']),
         'get_accounting_amount')
     draft_invoices_amount = fields.Function(fields.Numeric(
-            'Draft invoices amount'),
+            'Draft invoices amount', digits=(16, Eval('currency_digits', 2)),
+            depends=['currency_digits']),
         'get_draft_invoices_amount')
-    uninvoiced_amount = fields.Function(fields.Numeric('Uninvoiced amount'),
+    uninvoiced_amount = fields.Function(fields.Numeric('Uninvoiced amount',
+        digits=(16, Eval('currency_digits', 2)),
+        depends=['currency_digits']),
         'get_uninvoiced_amount')
-    amount_to_limit = fields.Function(fields.Numeric('Amount to limit'),
+    amount_to_limit = fields.Function(fields.Numeric('Amount to limit',
+        digits=(16, Eval('currency_digits', 2)),
+        depends=['currency_digits']),
         'get_amounts')
     limit_percent = fields.Function(fields.Numeric('% Limit', digits=(5, 2)),
         'get_amounts')
