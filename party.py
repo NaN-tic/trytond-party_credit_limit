@@ -29,7 +29,7 @@ class Party:
     draft_invoices_amount = fields.Function(fields.Numeric(
             'Draft invoices', digits=(16, Eval('currency_digits', 2)),
             depends=['currency_digits'],
-            help="Total amout of invoices to be posted."),
+            help="Total amount of invoices to be posted."),
         'get_draft_invoices_amount')
     uninvoiced_amount = fields.Function(fields.Numeric('Uninvoiced',
             digits=(16, Eval('currency_digits', 2)),

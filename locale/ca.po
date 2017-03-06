@@ -27,7 +27,7 @@ msgid "Unpayed"
 msgstr "Sense pagar"
 
 msgctxt "help:party.party,draft_invoices_amount:"
-msgid "Total amout of invoices to be posted."
+msgid "Total amount of invoices to be posted."
 msgstr "Import total de les factures pendents de comptabilitzar."
 
 msgctxt "help:party.party,pending_amount:"
