@@ -5,30 +5,43 @@ from sql import Literal
 from sql.aggregate import Sum
 from sql.conditionals import Coalesce, Case
 
+from trytond.pyson import Eval
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.wizard import Wizard, StateAction
 
 __all__ = ['Party', 'OpenLimit']
-__metaclass__ = PoolMeta
 
 
 class Party:
     __name__ = 'party.party'
+    __metaclass__ = PoolMeta
 
-    unpayed_amount = fields.Function(fields.Numeric('Unpayed amount'),
+    unpayed_amount = fields.Function(fields.Numeric('Unpayed',
+            digits=(16, Eval('currency_digits', 2)),
+            depends=['currency_digits'], help="Due amount until today."),
         'get_accounting_amount')
-    pending_amount = fields.Function(fields.Numeric('Pending amount'),
+    pending_amount = fields.Function(fields.Numeric('Pending',
+            digits=(16, Eval('currency_digits', 2)),
+            depends=['currency_digits'],
+            help="Amount to be due in the future."),
         'get_accounting_amount')
     draft_invoices_amount = fields.Function(fields.Numeric(
-            'Draft invoices amount'),
+            'Draft invoices', digits=(16, Eval('currency_digits', 2)),
+            depends=['currency_digits'],
+            help="Total amout of invoices to be posted."),
         'get_draft_invoices_amount')
-    uninvoiced_amount = fields.Function(fields.Numeric('Uninvoiced amount'),
+    uninvoiced_amount = fields.Function(fields.Numeric('Uninvoiced',
+            digits=(16, Eval('currency_digits', 2)),
+            depends=['currency_digits'],
+            help="Amount in processing sales still not invoiced."),
         'get_uninvoiced_amount')
-    amount_to_limit = fields.Function(fields.Numeric('Amount to limit'),
+    amount_to_limit = fields.Function(fields.Numeric('To limit',
+        digits=(16, Eval('currency_digits', 2)),
+        depends=['currency_digits']),
         'get_amounts')
-    limit_percent = fields.Function(fields.Numeric('% Limit'),
+    limit_percent = fields.Function(fields.Numeric('% Limit', digits=(5, 2)),
         'get_amounts')
 
     @classmethod
@@ -141,15 +154,17 @@ class Party:
                 raise Exception('Bad argument')
             res[name] = {}.fromkeys([p.id for p in parties],
                 Decimal('100.0') if name == 'limit_percent'
-                else Decimal('0.0'))
+                else Decimal('0.00'))
         for party in parties:
             if 'amount_to_limit' in names:
                 limit_amount = party.credit_limit_amount or Decimal('0.0')
                 res['amount_to_limit'][party.id] = (
                     limit_amount - party.credit_amount)
             if party.credit_limit_amount and 'limit_percent' in names:
-                res['limit_percent'][party.id] = (Decimal('100.0') *
+                percent = (Decimal('100.0') *
                     party.credit_amount / party.credit_limit_amount)
+                percent = percent.quantize(Decimal('0.01'))
+                res['limit_percent'][party.id] = percent
 
         for key in res.keys():
             if key not in names:
