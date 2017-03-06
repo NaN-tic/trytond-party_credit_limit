@@ -17,23 +17,26 @@ class Party:
     __name__ = 'party.party'
     __metaclass__ = PoolMeta
 
-    unpayed_amount = fields.Function(fields.Numeric('Unpayed amount',
-        digits=(16, Eval('currency_digits', 2)),
-        depends=['currency_digits']),
+    unpayed_amount = fields.Function(fields.Numeric('Unpayed',
+            digits=(16, Eval('currency_digits', 2)),
+            depends=['currency_digits'], help="Due amount until today."),
         'get_accounting_amount')
-    pending_amount = fields.Function(fields.Numeric('Pending amount',
-        digits=(16, Eval('currency_digits', 2)),
-        depends=['currency_digits']),
+    pending_amount = fields.Function(fields.Numeric('Pending',
+            digits=(16, Eval('currency_digits', 2)),
+            depends=['currency_digits'],
+            help="Amount to be due in the future."),
         'get_accounting_amount')
     draft_invoices_amount = fields.Function(fields.Numeric(
-            'Draft invoices amount', digits=(16, Eval('currency_digits', 2)),
-            depends=['currency_digits']),
+            'Draft invoices', digits=(16, Eval('currency_digits', 2)),
+            depends=['currency_digits'],
+            help="Total amout of invoices to be posted."),
         'get_draft_invoices_amount')
-    uninvoiced_amount = fields.Function(fields.Numeric('Uninvoiced amount',
-        digits=(16, Eval('currency_digits', 2)),
-        depends=['currency_digits']),
+    uninvoiced_amount = fields.Function(fields.Numeric('Uninvoiced',
+            digits=(16, Eval('currency_digits', 2)),
+            depends=['currency_digits'],
+            help="Amount in processing sales still not invoiced."),
         'get_uninvoiced_amount')
-    amount_to_limit = fields.Function(fields.Numeric('Amount to limit',
+    amount_to_limit = fields.Function(fields.Numeric('To limit',
         digits=(16, Eval('currency_digits', 2)),
         depends=['currency_digits']),
         'get_amounts')

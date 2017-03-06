@@ -3,28 +3,44 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "field:party.party,amount_to_limit:"
-msgid "Amount to limit"
-msgstr "Import restant"
+msgid "To limit"
+msgstr "Fins al limit"
 
 msgctxt "field:party.party,draft_invoices_amount:"
-msgid "Draft invoices amount"
-msgstr "Import factures esborrany"
+msgid "Draft invoices"
+msgstr "Factures esborrany"
 
 msgctxt "field:party.party,limit_percent:"
 msgid "% Limit"
 msgstr "% Límit"
 
 msgctxt "field:party.party,pending_amount:"
-msgid "Pending amount"
-msgstr "Import pendent"
+msgid "Pending"
+msgstr "Pendent"
 
 msgctxt "field:party.party,uninvoiced_amount:"
-msgid "Uninvoiced amount"
-msgstr "Import no facturat"
+msgid "Uninvoiced"
+msgstr "No facturat"
 
 msgctxt "field:party.party,unpayed_amount:"
-msgid "Unpayed amount"
-msgstr "Import sense pagar"
+msgid "Unpayed"
+msgstr "Sense pagar"
+
+msgctxt "help:party.party,draft_invoices_amount:"
+msgid "Total amout of invoices to be posted."
+msgstr "Import total de les factures pendents de comptabilitzar."
+
+msgctxt "help:party.party,pending_amount:"
+msgid "Amount to be due in the future."
+msgstr "Import amb venciment en el futur."
+
+msgctxt "help:party.party,uninvoiced_amount:"
+msgid "Amount in processing sales still not invoiced."
+msgstr "Import en vendes en process que no s'ha facturat."
+
+msgctxt "help:party.party,unpayed_amount:"
+msgid "Due amount until today."
+msgstr "Import vençut fins al dia d'avui."
 
 msgctxt "model:ir.action,name:act_party_credit_limit_form"
 msgid "Credit Limits"

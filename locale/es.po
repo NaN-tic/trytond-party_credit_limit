@@ -3,28 +3,44 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "field:party.party,amount_to_limit:"
-msgid "Amount to limit"
-msgstr "Importe hasta el límite"
+msgid "To limit"
+msgstr "Hasta el límite"
 
 msgctxt "field:party.party,draft_invoices_amount:"
-msgid "Draft invoices amount"
-msgstr "Importe facturas borrador"
+msgid "Draft invoices"
+msgstr "Facturas borrador"
 
 msgctxt "field:party.party,limit_percent:"
 msgid "% Limit"
 msgstr "% Límite"
 
 msgctxt "field:party.party,pending_amount:"
-msgid "Pending amount"
-msgstr "Importe pendiente"
+msgid "Pending"
+msgstr "Pendiente"
 
 msgctxt "field:party.party,uninvoiced_amount:"
-msgid "Uninvoiced amount"
-msgstr "Importe sin facturar"
+msgid "Uninvoiced"
+msgstr "Sin facturar"
 
 msgctxt "field:party.party,unpayed_amount:"
-msgid "Unpayed amount"
-msgstr "Importe sin pagar"
+msgid "Unpayed"
+msgstr "Sin pagar"
+
+msgctxt "help:party.party,draft_invoices_amount:"
+msgid "Total amout of invoices to be posted."
+msgstr ""
+
+msgctxt "help:party.party,pending_amount:"
+msgid "Amount to be due in the future."
+msgstr "Importe con vencimiento en un futuro."
+
+msgctxt "help:party.party,uninvoiced_amount:"
+msgid "Amount in processing sales still not invoiced."
+msgstr "Importe en ventas en proceso pendientes de facturar."
+
+msgctxt "help:party.party,unpayed_amount:"
+msgid "Due amount until today."
+msgstr "Importe vencido hasta el dia de hoy."
 
 msgctxt "model:ir.action,name:act_party_credit_limit_form"
 msgid "Credit Limits"
