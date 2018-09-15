@@ -13,10 +13,8 @@ from trytond.transaction import Transaction
 __all__ = ['Party']
 
 
-class Party:
+class Party(metaclass=PoolMeta):
     __name__ = 'party.party'
-    __metaclass__ = PoolMeta
-
     unpayed_amount = fields.Function(fields.Numeric('Unpayed',
             digits=(16, Eval('currency_digits', 2)),
             depends=['currency_digits'], help="Due amount until today."),
@@ -175,7 +173,7 @@ class Party:
         amounts = super(Party, cls).get_credit_amount(parties, name)
         with Transaction().set_context(without_sales=True):
             uninvoiced = cls.get_draft_invoices_amount(parties, name)
-            for party, value in uninvoiced.iteritems():
+            for party, value in uninvoiced.items():
                 amounts[party] += value
         return amounts
 
