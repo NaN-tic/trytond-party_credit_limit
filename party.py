@@ -71,6 +71,7 @@ class Party(metaclass=PoolMeta):
         company_id = user.company.id
 
         amount = Coalesce(line.debit, 0) - Coalesce(line.credit, 0)
+        # TODO where account active with ActivePeriodMixin
         cursor.execute(*line.join(account,
                 condition=account.id == line.account
             ).select(line.party,
@@ -79,8 +80,7 @@ class Party(metaclass=PoolMeta):
                 Sum(Case((line.maturity_date == None or
                             line.maturity_date >= today, amount),
                         else_=Literal(0))).as_('pending_amount'),
-            where=account.active
-            & (account.kind == 'receivable')
+            where=(account.kind == 'receivable')
             & (line.reconciliation == None)
             & (account.company == company_id)
             & line_query,
